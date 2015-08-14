@@ -47,6 +47,10 @@ int main(int argc, char** argv){
 	      std::vector<std::string> port_names;
 	      if(GetPortNameList(device_name, protocol_stack_name, interface_name, &port_names, &error_code)) {
 		BOOST_FOREACH(const std::string& port_name, port_names) {
+		  if (port_name != "/dev/ttyS0")
+		  {
+			continue;
+		  }
 		  std::cout << "\t\t\t" << port_name <<std::endl;
 
 		  std::vector<unsigned int> baudrates;

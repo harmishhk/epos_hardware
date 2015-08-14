@@ -19,14 +19,14 @@ int main(int argc, char** argv){
   std::string error_string;
   unsigned int error_code = 0;
 
-  std::cout << "Searching for USB EPOS2: 0x" << std::hex << serial_number << std::endl;
+  std::cout << "Searching for RS232 EPOS: 0x" << std::hex << serial_number << std::endl;
 
   std::string port_name;
 
   EposFactory epos_factory;
 
   NodeHandlePtr handle;
-  if(handle = epos_factory.CreateNodeHandle("EPOS2", "MAXON SERIAL V2", "USB", serial_number, &error_code)) {
+  if(handle = epos_factory.CreateNodeHandle("EPOS", "MAXON_RS232", "RS232", serial_number, &error_code)) {
     int position;
     if(VCS_GetPositionIs(handle->device_handle->ptr, handle->node_id, &position, &error_code)){
       std::cout << "Position: " << std::dec << position << std::endl;

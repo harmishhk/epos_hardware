@@ -191,8 +191,14 @@ int EposFactory::EnumerateNodes(const std::string device_name, const std::string
       return 1;
     }
     unsigned int bytes_read;
-    if(!VCS_GetObject(handle->ptr, i, 0x2004, 0x00, &node.serial_number, 8, &bytes_read, error_code)){
-      node.serial_number = 0;
+    uint32_t custom_numer;
+    if(!VCS_GetObject(handle->ptr, i, 0x200C, 0x01, &custom_numer, 4, &bytes_read, error_code))
+    {
+        node.serial_number = 0;
+    }
+    else
+    {
+        node.serial_number = custom_numer;
     }
     nodes->push_back(node);
   }
